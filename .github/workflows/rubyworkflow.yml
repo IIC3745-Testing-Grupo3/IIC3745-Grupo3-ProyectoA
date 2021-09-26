@@ -1,0 +1,20 @@
+name: rubyworkflow
+on:
+  pull_request:
+      paths:
+        - ".github/workflows/rubyworkflow.yml"
+        - "**.rb"
+jobs:
+  test:
+    name: Tests and linters
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Run tests
+        run: bundle exec rake

@@ -2,6 +2,5 @@
 
 # models the views and user interactions
 class View
-  def initialize()
-  end
+  def initialize; end
 end
