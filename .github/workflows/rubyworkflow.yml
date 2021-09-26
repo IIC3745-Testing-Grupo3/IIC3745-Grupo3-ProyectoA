@@ -1,8 +1,9 @@
 name: rubyworkflow
-pull_request:
-    paths:
-      - ".github/workflows/rubyworkflow.yml"
-      - "**.rb"
+on:
+  pull_request:
+      paths:
+        - ".github/workflows/rubyworkflow.yml"
+        - "**.rb"
 jobs:
   test:
     name: Tests and linters
