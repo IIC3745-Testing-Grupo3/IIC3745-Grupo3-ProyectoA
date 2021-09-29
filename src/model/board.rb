@@ -30,16 +30,23 @@ end
 
 # models a Minesweeper Board
 class Board
-  attr_reader :matrix_board
+  attr_accessor :matrix_board
 
-  def self.from_file(path); end
+  def self.from_file(path)
+    lines = File.read(path).split
+    dimensions, bombs = lines.pop(2).map(&:to_i)
 
-  def self.randomized(dimensions, n_bombs)
-    board = new(dimensions)
+    board = new(dimensions, bombs)
+    board.matrix_board = lines.map { |line| line.split(',').map { |value| Cell.new(value) } }
+    board
+  end
+
+  def self.randomized(dimensions, bombs)
+    board = new(dimensions, bombs)
     permutations = (0...dimensions).to_a.permutation(2)
     diagonal = (0...dimensions).to_a.map { |x| [x, x] }
     permutations += diagonal
-    bombs = permutations.to_a.sample(n_bombs)
+    bombs = permutations.to_a.sample(bombs)
     bombs.each do |y, x|
       board.matrix_board[y][x] = Cell.new('B')
     end
@@ -68,9 +75,10 @@ class Board
 
   private
 
-  def initialize(dimensions)
+  def initialize(dimensions, bombs)
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
+    @bombs = bombs
   end
 
   def count_surrounding(cell_y, cell_x)
