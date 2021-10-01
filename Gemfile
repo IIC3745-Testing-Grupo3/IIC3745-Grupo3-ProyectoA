@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'dotenv'
 gem 'flay' # Gem to find possible code clone flay (route*) *optional
 gem 'rake'
 gem 'rubocop'
