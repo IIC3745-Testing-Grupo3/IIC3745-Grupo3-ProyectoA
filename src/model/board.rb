@@ -1,32 +1,7 @@
 # frozen_string_literal: true
 
-# models a Minesweeper Cell
-class Cell
-  attr_reader :value, :hidden, :marked
-
-  def initialize(value)
-    @value = value
-    @hidden = true
-    @marked = false
-  end
-
-  def left_click
-    @hidden = false
-    value
-  end
-
-  def right_click
-    @marked = !marked
-  end
-
-  def to_s
-    @value.to_s
-  end
-
-  def inspect
-    to_s
-  end
-end
+require_relative './cell'
+require_relative '../utils/board_creators'
 
 # models a Minesweeper Board
 class Board
@@ -36,6 +11,7 @@ class Board
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
     @bombs = bombs
+    create_board
   end
 
   def from_file(path)
@@ -58,4 +34,17 @@ class Board
     @matrix_board[y_dim][x_dim]
   end
 
+  def create_board
+    generate_permutations(@dimensions, @bombs).each do |x, y|
+      @matrix_board[x][y] = Cell.new('B')
+    end
+    @matrix_board.each_with_index do |cell_list, x|
+      cell_list.each_with_index do |cell_value, y|
+        next unless cell_value.nil?
+
+        count = count_surrounding(self, x, y)
+        @matrix_board[x][y] = Cell.new(count)
+      end
+    end
+  end
 end
