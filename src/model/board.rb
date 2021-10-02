@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 require_relative './cell'
+require_relative '../observer/observable'
 require_relative '../utils/board_creators'
 
 # models a Minesweeper Board
-class Board
+class Board < Observable
   attr_accessor :matrix_board, :dimensions
 
   def initialize(dimensions, bombs)
+    super()
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
     @bombs = bombs
