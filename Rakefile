@@ -9,6 +9,5 @@ task :test do
 end
 
 RuboCop::RakeTask.new(:lint) do |task|
-  task.patterns = ['src/**/*.rb', 'src/**/**/*.rb', 'test/**/*.rb']
-  task.fail_on_error = false
+  task.patterns = ['src/**/*.rb', 'test/**/*.rb']
 end
