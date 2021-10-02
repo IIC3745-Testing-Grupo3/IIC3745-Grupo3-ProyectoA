@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
-require 'controller/minesweeper'
-require 'view/minesweeper_display'
-require 'model/board'
+require_relative 'controller/game_controller'
+require_relative 'view/game_view'
+require_relative 'model/board'
+
+board = Board.new(5, 4)
+view = View.new
+game_controller = GameController.new(board, view)
+game_controller.print_board
