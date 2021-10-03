@@ -7,7 +7,6 @@ class Cell
   def initialize(value)
     @value = value
     @hidden = true
-    @marked = false
   end
 
   def reveal
