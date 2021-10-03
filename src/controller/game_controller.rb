@@ -23,10 +23,11 @@ class GameController
     print_board
     while @is_playing
       input = request_input
-      @is_playing = false if input == 'exit'
-      x = input[0].ord - 65
-      y = input[1].to_i - 1
-      select(x, y)
+      if input == 'exit'
+        @is_playing = false
+        break
+      end
+      select(input[0].ord - 65, input[1].to_i - 1)
     end
   end
 
