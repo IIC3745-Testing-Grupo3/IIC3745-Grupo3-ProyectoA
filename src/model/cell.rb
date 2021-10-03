@@ -7,16 +7,11 @@ class Cell
   def initialize(value)
     @value = value
     @hidden = true
-    @marked = false
   end
 
   def reveal
     @hidden = false
     value
-  end
-
-  def right_click
-    @marked = !marked
   end
 
   def to_s
