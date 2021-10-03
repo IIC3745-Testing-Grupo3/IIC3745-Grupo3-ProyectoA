@@ -37,13 +37,9 @@ class BoardCreatorTest < Test::Unit::TestCase
     assert_equal([1, 1, 2, 1, 2, 1, 0, 1, 1], board_values)
   end
 
-  def test_out_of_bounds_false
+  def test_out_of_bounds
     board = Board.new(3, 2, [[1, 'B', 2], [1, 2, 'B'], [0, 1, 1]])
     assert_false(out_of_bounds(board, 0, 1))
-  end
-
-  def test_out_of_bounds_true
-    board = Board.new(3, 2, [[1, 'B', 2], [1, 2, 'B'], [0, 1, 1]])
     assert_true(out_of_bounds(board, 3, 0))
   end
 end
