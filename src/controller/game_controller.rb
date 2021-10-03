@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../utils/validations'
+
 # models a Controller for Minesweeper logic and interactions
 class GameController
   attr_accessor :model, :view, :is_playing
@@ -27,7 +29,7 @@ class GameController
         @is_playing = false
         break
       end
-      select(input[0].upcase.ord - 65, input[1].to_i - 1)
+      valid_input(input, @model.dimensions) ? select(input[0].upcase.ord - 65, input[1].to_i - 1) : @view.print_invalid
     end
   end
 

@@ -26,6 +26,10 @@ class View < Observer
     puts "\n¡Has ganado!\n"
   end
 
+  def print_invalid
+    p 'El valor ingresado no esta permitido'
+  end
+
   def update(board)
     print_board(board)
   end
