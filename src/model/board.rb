@@ -6,7 +6,7 @@ require_relative '../utils/board_creators'
 
 # models a Minesweeper Board
 class Board < Observable
-  attr_accessor :matrix_board, :dimensions, :completed
+  attr_accessor :matrix_board, :dimensions, :completed, :cells_revealed
 
   def initialize(dimensions, bombs, game = nil)
     super()
@@ -39,20 +39,16 @@ class Board < Observable
   end
 
   def reveal_cell(cord_x, cord_y)
+    was_hidden = @matrix_board[cord_x][cord_y].hidden
     value = @matrix_board[cord_x][cord_y].reveal
     value == 'B' && @bombs_cordinates.each { |x, y| @matrix_board[x][y].reveal }
-    @cells_revealed += 1
+    @cells_revealed += 1 if was_hidden && value != 'B'
     @completed = true if @cells_revealed == @dimensions**2 - @bombs
     value
   end
 
   def make_chain(cord_x, cord_y)
-    # The following checks if the cell value is numeric :)
-    begin
-      check_surroundings(cord_x, cord_y) unless Float(@matrix_board[cord_x][cord_y].value.to_s).nil?
-    rescue StandardError
-      false
-    end
+    check_surroundings(cord_x, cord_y) if @matrix_board[cord_x][cord_y].value.to_s == '0'
     notify_all
   end
 
