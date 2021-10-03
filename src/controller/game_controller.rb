@@ -11,7 +11,7 @@ class GameController
   def print_board
     @view.print_board(@model)
   end
-  
+
   def request_input
     @view.print_select_cell
     gets.chomp

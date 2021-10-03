@@ -49,7 +49,7 @@ class Board < Observable
       end
     end
   end
-  
+
   def reveal_cell(cord_x, cord_y)
     @matrix_board[cord_x][cord_y].reveal
   end

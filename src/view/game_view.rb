@@ -13,7 +13,7 @@ class View < Observer
     board.matrix_board.each_with_index { |x, index| p "#{(64 + index).chr} * #{x.join('  ')} *" }
     p line
   end
-  
+
   def print_select_cell
     print 'Selecciona una casilla (Por ejemplo A2): '
   end
