@@ -71,15 +71,8 @@ class GameControllerTest < Test::Unit::TestCase
     $stdin = input
     @controller.play
     assert_false(@controller.is_playing)
-    board_values = []
-    @controller.model.matrix_board.each_with_index do |cell_list, x|
-      cell_list.each_with_index do |cell_value, y|
-        if !@controller.model.matrix_board[x][y].hidden
-          board_values <<  1 
-        end
-      end
-    end
-    assert_equal(0, board_values.length)
+    board_values = @controller.model.matrix_board.sum { |cell_list| cell_list.count { |x| !x.hidden } }
+    assert_equal(0, board_values)
   end
 
   def test_check_cell_completed
