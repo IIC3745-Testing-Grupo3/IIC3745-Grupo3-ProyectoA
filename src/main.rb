@@ -7,4 +7,5 @@ require_relative 'model/board'
 board = Board.new(5, 4)
 view = View.new
 game_controller = GameController.new(board, view)
-game_controller.print_board
+board.add_observer(view)
+game_controller.play
