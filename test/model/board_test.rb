@@ -13,4 +13,14 @@ class BoardTest < Test::Unit::TestCase
     board.reveal_cell(0, 0)
     assert_equal(board.matrix_board[0][0].hidden, false)
   end
+
+  def test_no_extra_reveals
+    board = Board.new(2, 1, [
+                        [1, 1],
+                        [1, 'B']
+                      ])
+    board.reveal_cell(0, 1)
+    board.make_chain(0, 1)
+    assert_false(board.completed)
+  end
 end
