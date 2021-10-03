@@ -2,6 +2,8 @@
 
 # models a Controller for Minesweeper logic and interactions
 class GameController
+  attr_accessor :model, :view, :is_playing
+
   def initialize(board_model, board_view)
     @model = board_model
     @view = board_view
