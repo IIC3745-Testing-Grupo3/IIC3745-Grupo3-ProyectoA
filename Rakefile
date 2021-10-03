@@ -16,6 +16,7 @@ task :test do
   ruby 'test/model/cell_test.rb'
   ruby 'test/model/board_test.rb'
   ruby 'test/controller/game_controller_test.rb'
+  ruby 'test/observer/observer_test.rb'
   ruby 'test/utils/board_creators_test.rb'
 end
 
