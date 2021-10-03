@@ -29,7 +29,17 @@ class GameController
   end
 
   def select(cord_x, cord_y)
-    @model.reveal_cell(cord_x, cord_y)
+    value = @model.reveal_cell(cord_x, cord_y)
+    check_cell(value, cord_x, cord_y)
+  end
+
+  def check_cell(value, cord_x, cord_y)
     @model.notify_all
+    if value == 'B'
+      @is_playing = false
+      @view.print_game_over
+    else
+      puts "#{(cord_x + 64).chr} #{cord_y + 1}"
+    end
   end
 end
