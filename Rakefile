@@ -7,6 +7,7 @@ task default: %w[lint test]
 task :test do
   ruby 'test/example_test.rb'
   ruby 'test/model/cell_test.rb'
+  ruby 'test/model/board_test.rb'
 end
 
 RuboCop::RakeTask.new(:lint) do |task|
