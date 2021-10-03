@@ -35,6 +35,12 @@ class GameControllerTest < Test::Unit::TestCase
     assert_false(@controller.is_playing)
   end
 
+  def test_play_exit
+    $stdin = StringIO.new('exit')
+    @controller.play
+    assert_false(@controller.is_playing)
+  end
+
   def test_request_input
     $stdin = StringIO.new('A1')
     value = @controller.request_input
