@@ -29,7 +29,7 @@ class GameControllerTest < Test::Unit::TestCase
     assert_false(@controller.is_playing)
   end
 
-  def test_play_loose
+  def test_play_lose
     $stdin = StringIO.new('B2')
     @controller.play
     assert_false(@controller.is_playing)
