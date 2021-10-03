@@ -39,9 +39,10 @@ class Board < Observable
   end
 
   def reveal_cell(cord_x, cord_y)
+    was_hidden = @matrix_board[cord_x][cord_y].hidden
     value = @matrix_board[cord_x][cord_y].reveal
     value == 'B' && @bombs_cordinates.each { |x, y| @matrix_board[x][y].reveal }
-    @cells_revealed += 1
+    @cells_revealed += 1 if was_hidden && value != 'B'
     @completed = true if @cells_revealed == @dimensions**2 - @bombs
     value
   end
