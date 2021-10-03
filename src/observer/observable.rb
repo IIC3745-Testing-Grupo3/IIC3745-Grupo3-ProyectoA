@@ -2,6 +2,8 @@
 
 # This class emulates an observable item behaveour
 class Observable
+  attr_reader :observers
+
   def initialize
     @observers = []
   end

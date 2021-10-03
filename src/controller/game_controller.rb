@@ -36,8 +36,8 @@ class GameController
     check_cell(value, cord_x, cord_y)
   end
 
-  def check_cell(value, _cord_x, _cord_y)
-    @model.notify_all
+  def check_cell(value, cord_x, cord_y)
+    @model.make_chain(cord_x, cord_y)
     if value == 'B'
       @is_playing = false
       @view.print_game_over

@@ -45,4 +45,27 @@ class Board < Observable
     @completed = true if @cells_revealed == @dimensions**2 - @bombs
     value
   end
+
+  def make_chain(cord_x, cord_y)
+    # The following checks if the cell value is numeric :)
+    begin
+      check_surroundings(cord_x, cord_y) unless Float(@matrix_board[cord_x][cord_y].value.to_s).nil?
+    rescue StandardError
+      false
+    end
+    notify_all
+  end
+
+  def check_surroundings(cord_x, cord_y)
+    neighbors = [[-1, 0], [0, -1], [-1, -1], [1, 0], [0, 1], [1, 1], [1, -1], [-1, 1]]
+    neighbors.each do |x, y|
+      new_x = cord_x + x
+      new_y = cord_y + y
+      cell = @matrix_board[new_x][new_y] if new_x.between?(0, @dimensions - 1) && new_y.between?(0, @dimensions - 1)
+      next unless cell&.hidden
+
+      reveal_cell(new_x, new_y)
+      cell.value.zero? && check_surroundings(new_x, new_y)
+    end
+  end
 end
