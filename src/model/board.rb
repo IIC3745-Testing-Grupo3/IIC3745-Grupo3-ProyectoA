@@ -15,11 +15,8 @@ class Board < Observable
     @bombs = bombs
     @completed = false
     @cells_revealed = 0
-    if game.nil?
-      create_board
-    else
-      @matrix_board = game.map { |line| line.map { |value| Cell.new(value) } }
-    end
+    game.nil? && create_board
+    @matrix_board = game.map { |line| line.map { |value| Cell.new(value) } } unless game.nil?
   end
 
   def return_value(y_dim, x_dim)
