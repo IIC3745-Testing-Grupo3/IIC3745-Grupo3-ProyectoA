@@ -22,6 +22,10 @@ class View < Observer
     puts "\nOh no, has perdido"
   end
 
+  def print_win
+    puts "\n¡Has ganado!\n"
+  end
+
   def update(board)
     print_board(board)
   end

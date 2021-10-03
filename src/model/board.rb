@@ -6,13 +6,15 @@ require_relative '../utils/board_creators'
 
 # models a Minesweeper Board
 class Board < Observable
-  attr_accessor :matrix_board, :dimensions
+  attr_accessor :matrix_board, :dimensions, :completed
 
   def initialize(dimensions, bombs)
     super()
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
     @bombs = bombs
+    @completed = false
+    @cells_revealed = 0
     create_board
   end
 
@@ -51,6 +53,9 @@ class Board < Observable
   end
 
   def reveal_cell(cord_x, cord_y)
-    @matrix_board[cord_x][cord_y].reveal
+    value = @matrix_board[cord_x][cord_y].reveal
+    @cells_revealed += 1
+    @completed = true if @cells_revealed == @dimensions**2 - @bombs
+    value
   end
 end
