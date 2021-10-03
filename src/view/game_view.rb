@@ -10,7 +10,7 @@ class View < Observer
     line = "  * *#{'  *' * range} *"
     p "    #{(1..board.dimensions).to_a.join('  ')}  "
     p line
-    board.matrix_board.each_with_index { |x, index| p "#{(64 + index).chr} * #{x.join('  ')} *" }
+    board.matrix_board.each_with_index { |x, index| p "#{(65 + index).chr} * #{x.join('  ')} *" }
     p line
   end
 
@@ -20,6 +20,10 @@ class View < Observer
 
   def print_game_over
     puts "\nOh no, has perdido"
+  end
+
+  def print_win
+    puts "\n¡Has ganado!\n"
   end
 
   def update(board)

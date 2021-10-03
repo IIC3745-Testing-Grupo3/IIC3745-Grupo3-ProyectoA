@@ -22,7 +22,7 @@ class GameController
     while @is_playing
       input = request_input
       @is_playing = false if input == 'exit'
-      x = input[0].ord - 64
+      x = input[0].ord - 65
       y = input[1].to_i - 1
       select(x, y)
     end
@@ -33,13 +33,14 @@ class GameController
     check_cell(value, cord_x, cord_y)
   end
 
-  def check_cell(value, cord_x, cord_y)
+  def check_cell(value, _cord_x, _cord_y)
     @model.notify_all
     if value == 'B'
       @is_playing = false
       @view.print_game_over
-    else
-      puts "#{(cord_x + 64).chr} #{cord_y + 1}"
+    elsif @model.completed
+      @is_playing = false
+      @view.print_win
     end
   end
 end
