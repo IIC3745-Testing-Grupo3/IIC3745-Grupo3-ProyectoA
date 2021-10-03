@@ -8,28 +8,16 @@ require_relative '../utils/board_creators'
 class Board < Observable
   attr_accessor :matrix_board, :dimensions
 
-  def initialize(dimensions, bombs)
+  def initialize(dimensions, bombs, game = nil)
     super()
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
     @bombs = bombs
-    create_board
-  end
-
-  def from_file(path)
-    lines = File.read(path).split
-    dimensions, bombs = lines.pop(2).map(&:to_i)
-    @dimensions = dimensions
-    @bombs = bombs
-    @matrix_board = lines.map { |line| line.split(',').map { |value| Cell.new(value) } }
-  end
-
-  def inspect
-    string = ''
-    @matrix_board.each do |row|
-      string += "#{row.inspect}\n"
+    if game.nil?
+      create_board
+    else
+      @matrix_board = game.map { |line| line.map { |value| Cell.new(value) } }
     end
-    string
   end
 
   def return_value(y_dim, x_dim)
