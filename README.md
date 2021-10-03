@@ -51,6 +51,6 @@ Dentro de este proyecto ocupamos [Rubocop](https://rubocop.org/) y [SonarCloud](
 
 ### CI
 
-Cada _pull request_ está configurada de tal manera que corran los tests, rubocop y sonarcloud, bloqueando la opción de integrar esta rama a _main_ si es que uno de estos _checks_ falla.
+Cada _pull request_ está configurada de tal manera que corran los tests, rubocop y sonarcloud (utilizando [_Github Actions_](./.github/workflows/rubyworkflow.yml)), bloqueando la opción de integrar esta rama a _main_ si es que uno de estos _checks_ falla.
 
 También es requisito que cada rama esté al día con _main_ con tal de asegurarnos de que contenga los últimos cambios y tests y así no romper nada.
