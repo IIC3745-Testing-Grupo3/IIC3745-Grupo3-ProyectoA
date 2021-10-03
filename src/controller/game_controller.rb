@@ -27,7 +27,7 @@ class GameController
         @is_playing = false
         break
       end
-      select(input[0].ord - 65, input[1].to_i - 1)
+      select(input[0].upcase.ord - 65, input[1].to_i - 1)
     end
   end
 
