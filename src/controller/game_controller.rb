@@ -22,7 +22,7 @@ class GameController
     while @is_playing
       input = request_input
       @is_playing = false if input == 'exit'
-      x = input[0].ord - 64
+      x = input[0].ord - 65
       y = input[1].to_i - 1
       select(x, y)
     end
