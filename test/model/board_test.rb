@@ -24,6 +24,19 @@ class BoardTest < Test::Unit::TestCase
     assert_false(board.completed)
   end
 
+  def test_check_surroundings
+    board = Board.new(3, 1, [
+                        [1, 1, 1],
+                        [1, 1, 1],
+                        [1, 1, 'B']
+                      ])
+
+    board.check_surroundings(0, 0)
+    assert_equal(3, board.cells_revealed)
+    board.check_surroundings(2, 2)
+    assert_equal(5, board.cells_revealed)
+  end
+
   def test_cells_revealed_counter
     board = Board.new(3, 2, [
                         [0, 2, 'B'],
