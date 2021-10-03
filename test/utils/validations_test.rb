@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../test_helper'
+require_relative '../../src/utils/validations'
 require 'test/unit'
 
 class ValidationsTest < Test::Unit::TestCase
