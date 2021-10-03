@@ -38,6 +38,8 @@ class GameController
     if value == 'B'
       @is_playing = false
       @view.print_game_over
+    else
+      puts "#{(cord_x + 64).chr} #{cord_y + 1}"
     end
   end
 end
