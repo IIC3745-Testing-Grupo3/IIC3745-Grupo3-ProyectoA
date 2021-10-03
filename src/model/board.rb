@@ -13,6 +13,7 @@ class Board < Observable
     @matrix_board = Array.new(dimensions) { Array.new(dimensions, nil) }
     @dimensions = dimensions
     @bombs = bombs
+    @bombs_cordinates = []
     @completed = false
     @cells_revealed = 0
     game.nil? && create_board
@@ -26,19 +27,20 @@ class Board < Observable
   def create_board
     generate_permutations(@dimensions, @bombs).each do |x, y|
       @matrix_board[x][y] = Cell.new('B')
+      @bombs_cordinates.push([x, y])
     end
     @matrix_board.each_with_index do |cell_list, x|
       cell_list.each_with_index do |cell_value, y|
         next unless cell_value.nil?
 
-        count = count_surrounding(self, x, y)
-        @matrix_board[x][y] = Cell.new(count)
+        @matrix_board[x][y] = Cell.new(count_surrounding(self, x, y))
       end
     end
   end
 
   def reveal_cell(cord_x, cord_y)
     value = @matrix_board[cord_x][cord_y].reveal
+    value == 'B' && @bombs_cordinates.each { |x, y| @matrix_board[x][y].reveal }
     @cells_revealed += 1
     @completed = true if @cells_revealed == @dimensions**2 - @bombs
     value
