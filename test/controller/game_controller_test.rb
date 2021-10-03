@@ -63,6 +63,25 @@ class GameControllerTest < Test::Unit::TestCase
     assert_false(@controller.is_playing)
   end
 
+  def test_out_of_range_input
+    input = StringIO.new
+    input.puts 'Z9'
+    input.puts 'exit'
+    input.rewind
+    $stdin = input
+    @controller.play
+    assert_false(@controller.is_playing)
+    board_values = []
+    @controller.model.matrix_board.each_with_index do |cell_list, x|
+      cell_list.each_with_index do |cell_value, y|
+        if !@controller.model.matrix_board[x][y].hidden
+          board_values <<  1 
+        end
+      end
+    end
+    assert_equal(0, board_values.length)
+  end
+
   def test_check_cell_completed
     @controller.select(0, 0)
     @controller.select(0, 1)
