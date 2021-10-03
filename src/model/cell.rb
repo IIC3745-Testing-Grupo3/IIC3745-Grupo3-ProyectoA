@@ -10,7 +10,7 @@ class Cell
     @marked = false
   end
 
-  def left_click
+  def reveal
     @hidden = false
     value
   end
@@ -20,7 +20,11 @@ class Cell
   end
 
   def to_s
-    @value.to_s
+    if @hidden
+      '-'
+    else
+      @value.to_s
+    end
   end
 
   def inspect
