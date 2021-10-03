@@ -23,4 +23,16 @@ class BoardTest < Test::Unit::TestCase
     board.make_chain(0, 1)
     assert_false(board.completed)
   end
+
+  def test_cells_revealed_counter
+    board = Board.new(3, 2, [
+                        [0, 2, 'B'],
+                        [0, 2, 'B'],
+                        [0, 1, 1]
+                      ])
+    board.make_chain(0, 0)
+    board.reveal_cell(0, 1)
+    value = board.cells_revealed
+    assert_equal(6, value)
+  end
 end
