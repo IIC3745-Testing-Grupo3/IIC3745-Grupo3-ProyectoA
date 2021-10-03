@@ -9,7 +9,7 @@ class ObserverTest < Test::Unit::TestCase
   def test_check_observer
     observer = Observer.new
     observable = Board.new(2, 1)
-    assert_raise(NotImplementedError.new("Observer has not implemented method 'update'")) { observer.update(observable) }
+    expected_message = "Observer has not implemented method 'update'"
+    assert_raise(NotImplementedError.new(expected_message)) { observer.update(observable) }
   end
-  
 end
