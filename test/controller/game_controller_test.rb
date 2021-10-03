@@ -47,6 +47,17 @@ class GameControllerTest < Test::Unit::TestCase
     assert_equal('A1', value)
   end
 
+  def test_request_input_downcase
+    input = StringIO.new
+    input.puts 'a1'
+    input.puts 'a2'
+    input.puts 'b1'
+    input.rewind
+    $stdin = input
+    @controller.play
+    assert_false(@controller.is_playing)
+  end
+
   def test_check_cell_b
     @controller.check_cell('B', 0, 1)
     assert_false(@controller.is_playing)
