@@ -47,12 +47,7 @@ class Board < Observable
   end
 
   def make_chain(cord_x, cord_y)
-    # The following checks if the cell value is numeric :)
-    begin
-      check_surroundings(cord_x, cord_y) unless Float(@matrix_board[cord_x][cord_y].value.to_s).nil?
-    rescue StandardError
-      false
-    end
+    check_surroundings(cord_x, cord_y) if @matrix_board[cord_x][cord_y].value.to_s == '0'
     notify_all
   end
 
