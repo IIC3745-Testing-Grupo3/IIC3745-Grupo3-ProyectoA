@@ -15,7 +15,11 @@ class View < Observer
   end
 
   def print_select_cell
-    print 'Selecciona una casilla (Por ejemplo A2): '
+    print "\nSelecciona una casilla (Por ejemplo A2): "
+  end
+
+  def print_game_over
+    puts "\nOh no, has perdido"
   end
 
   def update(board)
