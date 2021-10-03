@@ -6,7 +6,7 @@ require_relative '../utils/board_creators'
 
 # models a Minesweeper Board
 class Board < Observable
-  attr_accessor :matrix_board, :dimensions, :completed
+  attr_accessor :matrix_board, :dimensions, :completed, :cells_revealed
 
   def initialize(dimensions, bombs, game = nil)
     super()
